@@ -15,11 +15,13 @@ class FlaskDataBase:
             return False
         return True
 
-    def dellmenu(self):
+    def getmenu(self):
         try:
+            sql = '''SELECT + FROM mainmenu'''
             self.__cur.execute("DELETE FROM mainmenu ")
-            self.__db.commit()
-        except sqlite3.Error as e:
-            print('Ошибка удаления в меню БД  ' + str(e))
-            return False
-        return True
+            res = self.__cur.fetchall()
+            if res: return res
+        except:
+            print('Ошибка получения меню БД')
+
+        return []
